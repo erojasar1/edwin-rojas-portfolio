@@ -41,5 +41,20 @@
   }, { threshold: 0.5 });
   counters.forEach(c => counterIO.observe(c));
 
+  // Experience gallery carousel
+  const gallery = document.getElementById('expGallery');
+  const prevBtn = document.getElementById('expPrev');
+  const nextBtn = document.getElementById('expNext');
+  if (gallery && prevBtn && nextBtn) {
+    const scrollByCard = (dir) => {
+      const card = gallery.querySelector('.exp-card');
+      const gap = 24;
+      const amount = card ? (card.offsetWidth + gap) * dir : 320 * dir;
+      gallery.scrollBy({ left: amount, behavior: 'smooth' });
+    };
+    prevBtn.addEventListener('click', () => scrollByCard(-1));
+    nextBtn.addEventListener('click', () => scrollByCard(1));
+  }
+
   // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
